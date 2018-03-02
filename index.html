@@ -82,13 +82,13 @@
     if (scoreCounter === targetNumber) {
       wins++;
       $("#your-wins").html("Wins: " + wins);
-      var targetNumber = Math.floor(Math.random() * 101) + 19;
+      targetNumber = Math.floor(Math.random() * 101) + 19;
       resetGame();
     }
     if (scoreCounter >= targetNumber) {
       losses++;
       $("#your-losses").html("Losses: " + losses);
-      var targetNumber = Math.floor(Math.random() * 101) + 19;
+      targetNumber = Math.floor(Math.random() * 101) + 19;
       resetGame();
     }
 
