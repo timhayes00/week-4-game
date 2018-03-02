@@ -5,27 +5,84 @@
 
   <style type="text/css">
     body{
-      background: lightcoral;
+      background: lightgreen;
+      width: 800px;
+    }
+
+    #splashHeader{
+      background: darkorange;
+      color: white;
+      font-size: 24pt;
+      width: 33%;
+    }
+
+    #number-to-guess{
+      background: green;
+      font-size: 24pt;
+      color: darkblue;
+      height: 150px;
+      width: 25%;
+    }
+
+    #scoreboard{
+      background: lightblue;
+      font-size: 12pt;
+      color: black;
+      height: 150px;
+      width: 15%;   
+    }
+
+    #instructions{
+      background: lightgoldenrodyellow;
+      color: green;
+      font-size: 12pt;
+      width: 66%;
+    }
+
+    #score-report{
+      background: darkgreen;
+      color: white;
+      font-size: 12pt;
+      width: 37%;
+      margin: 5px 0px 10px 0px;
+    }
+
+    #score-total{
+      background: darkgreen;
+      color: white;
+      font-size: 24pt;
+      width: 37%;
+      height: 100px;
     }
 
     .crystal-image {
-      width: 200px;
-      height: 200px;
+      width: 110px;
+      height: 110px;
+      margin: 5px;
     }
+
   </style>
 
 </head>
 <body>
+  <div id="splashHeader">Crystal Collector!</div>
+  <div id="instructions">
+    <p>You will be given a random number at the starter of the game</p>
+    <p>There are four crystals below. By clicking on a crystal you will add a specific amount of points to your total score.</p>
+    <p>You win the game by matching your total score to a random number, you lose if your total score goes above the random number</p>
+    <p>The value of each crystal is hidden until you click on it</p>
+    <p>Each time when the game starts, the game will change the values of the crystals.</p>
+  </div>
 
-  <span><h1>Target Number: <div id="number-to-guess"></div></h1><div id="your-wins"></div><div id="your-losses"></div></span>
+  <row><div id="number-to-guess"></div><div id="scoreboard"><div id="wins-losses"></div><div id="your-wins"></div><div id="your-losses"></div></div></div></row>
 
   <!-- Note that this div is now empty. We will fill it dynamically -->
   <div id="crystals">
   </div>
-  <span><h2><div id="your-score"></div></h2></span>
+  <div id="score-report">Your total score is:</div>
+  <div id="score-total"><row id="your-score"></row></div>
   
-  <!-- JAVASCRIPT  -->
-  <!-- ========================================= -->
+
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
   <script type="text/javascript">
@@ -61,34 +118,35 @@
   function resetGame(){
     for (var i = 0; i < 4; i++) {
       imageCrystal.attr("data-crystalvalue", Math.floor(Math.random() * 12) + 1);
-      scoreCounter = 0;
-
-      $("#number-to-guess").html(targetNumber);
-      
     }
+    console.log(crystals);
+    scoreCounter = 0;
+    $("#your-score").html(scoreCounter);
+    targetNumber = Math.floor(Math.random() * 101) + 19;
+    $("#number-to-guess").html(targetNumber);
+    $("#wins-losses").html("");
+    
   }
 
   resetGame();
 
   crystals.on("click", ".crystal-image", function() {
     var crystalValue = ($(this).attr("data-crystalvalue"));
-    console.log(crystalValue + " = crystalValue");
     crystalValue = parseInt(crystalValue);
     scoreCounter += crystalValue;
     $("#your-score").html(scoreCounter);
-    console.log(scoreCounter + " = score counter");
-    console.log(targetNumber + " = target number");
+
 
     if (scoreCounter === targetNumber) {
       wins++;
       $("#your-wins").html("Wins: " + wins);
-      targetNumber = Math.floor(Math.random() * 101) + 19;
+      $("#wins-losses").html("You won!");
       resetGame();
     }
     if (scoreCounter >= targetNumber) {
       losses++;
       $("#your-losses").html("Losses: " + losses);
-      targetNumber = Math.floor(Math.random() * 101) + 19;
+      $("#wins-losses").html("You lost!");
       resetGame();
     }
 
