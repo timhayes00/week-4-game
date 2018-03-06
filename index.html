@@ -79,13 +79,13 @@ var data = [
 // </div>
 
     for (var qNum = 0; qNum < 4; qNum++){
-        var questionDiv = '<div class="container"><div class ="row"><div class="col-md-6">' + data[qNum].question + '</div></div></div>'
-        document.querySelector("#question").innerHTML += questionDiv + "<hr>";
+        var questionDiv = '<div class="container"><div class ="row"><div class="col-md-8">' + data[qNum].question + '</div></div></div>'
+        document.querySelector("#question").innerHTML += "<br>" + questionDiv + "<hr>";
+
         for (var i = 0; i < data[qNum].potentialAnswers.length; i++) {
-            var newAnswerDiv = "<input type='radio'>" + data[qNum].potentialAnswers[i] + "</input>";
+            var newAnswerDiv = '<div class="radio">' + data[qNum].potentialAnswers[i] + "</div><hr>";
+            document.querySelector('.radio').innerHTML += newAnswerDiv;
             console.log(newAnswerDiv);
-            // document.querySelector("#answer").innerHTML += newAnswerDiv;  
-                
             }
     }
 
