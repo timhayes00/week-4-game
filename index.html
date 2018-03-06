@@ -16,6 +16,7 @@
 
 <body>
 <h1><div class="time-remaining"></div></h1>
+
 <div class="container">
         <div id="question">
         <form>
@@ -66,16 +67,25 @@ var data = [
         answer:"1933"
     }
 ]
-
+//REFERENCE MATERIAL
+// <div class="container">
+//         <div id="question">
+//         <form>
+//             <div class="radio">
+//             <label><input type="radio" name="optradio"></label>
+//             </div>
+//         </form>
+//         </div>
+// </div>
 
     for (var qNum = 0; qNum < 4; qNum++){
-        var questionDiv = $("#question");
-
+        var questionDiv = '<div class="container"><div class ="row"><div class="col-md-6">' + data[qNum].question + '</div></div></div>'
+        document.querySelector("#question").innerHTML += questionDiv + "<hr>";
         for (var i = 0; i < data[qNum].potentialAnswers.length; i++) {
-            console.log("progress? " + data[qNum].potentialAnswers);
-
-            var newAnswerDiv = $("<input type='radio'>" + data[qNum].potentialAnswers[i] + "</input>");
-            newAnswerDiv.append(newAnswerDiv);        
+            var newAnswerDiv = "<input type='radio'>" + data[qNum].potentialAnswers[i] + "</input>";
+            console.log(newAnswerDiv);
+            // document.querySelector("#answer").innerHTML += newAnswerDiv;  
+                
             }
     }
 
