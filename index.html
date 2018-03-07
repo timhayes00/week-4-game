@@ -16,12 +16,18 @@
 
 <body>
 <h1><div class="time-remaining"></div></h1>
+<div class="container">
+    <div id="time-remaining">
+
+    </div>
+</div>
+
 
 <div class="container">
         <div id="question">
         <form>
-            <div class="radio">
-            <label><input type="radio" name="optradio"></label>
+            <div id="radio">
+            
             </div>
         </form>
         </div>
@@ -39,7 +45,7 @@ if (!clockRunning) {
     console.log("we have ignition");
   intervalId = setInterval(count, 1000);
   clockRunning = true;
-  $("time-remaining").text("You have " + (timeRemaining - count) + " seconds left");
+  $("#time-remaining").text("You have " + (timeRemaining - count) + " seconds left");
 }
 }
 
@@ -62,7 +68,7 @@ var data = [
         answer:"21"
     },
     {
-        question:"What year was Prohibition prohibited in the USA?",
+        question:"What year was Prohibition repealed in the USA?",
         potentialAnswers:["1930", "1931", "1932", "1933"],
         answer:"1933"
     }
@@ -78,13 +84,24 @@ var data = [
 //         </div>
 // </div>
 
+//MIGHT BE USEFUL TO TROUBLE SHOOT THE CREATION OF PROPER TAGS
+// //uses JQuery dynamically creates a new .img tag
+// var catImage = $("<img>");
+
+// //fills the tag in with the source URL and gives accessibility readers the "alt-text" to tell it it's a picture of a cat
+// catImage.attr("src", imageUrl);
+// catImage.attr("alt", "cat image");
+
+// //Puts it in before the previous cat images, if any
+// $("#images").prepend(catImage);
+
     for (var qNum = 0; qNum < 4; qNum++){
         var questionDiv = '<div class="container"><div class ="row"><div class="col-md-8">' + data[qNum].question + '</div></div></div>'
         document.querySelector("#question").innerHTML += "<br>" + questionDiv + "<hr>";
 
         for (var i = 0; i < data[qNum].potentialAnswers.length; i++) {
-            var newAnswerDiv = '<div class="radio">' + data[qNum].potentialAnswers[i] + "</div><hr>";
-            document.querySelector('.radio').innerHTML += newAnswerDiv;
+            var newAnswerDiv = '<label><input type="radio" name="optradio"><div id="radio">' + data[qNum].potentialAnswers[i] + "</label></div>";
+            document.querySelector("#radio").innerHTML += newAnswerDiv + "<hr>";
             console.log(newAnswerDiv);
             }
     }
