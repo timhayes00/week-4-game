@@ -1,9 +1,9 @@
 var intervalId;
 var startTime = 30;
 var count = 0;
-var answersUnanswered = 4;
 var answersCorrect = 0;
 var answersWrong = 0;
+var gameHTML = $(".game-container");
 
 
 startClock = function () {
@@ -13,28 +13,67 @@ startClock = function () {
 showTime = function () {
     $("#time-remaining").html("You have " + (startTime - count) + " seconds left");
     count++;
-    console.log(count)     
-    if(count === 31){
-      gameOver();
+    console.log(count)
+    if (count === 31) {
+        gameOver();
     }
 }
 
-gameOver = function(){
+gameOver = function () {
     alert("Time's up!")
+    console.log("ignition")
+    $.each($("input[optradio='question0']:checked"), function () {
 
+        if ($(this).val() === data[0].answer) {
+            answersCorrect++;
+        } else {
+            answersWrong++;
+        }
+    }),
+        $.each($("input[optradio='question1']:checked"), function () {
+            if ($(this).val() === data[1].answer) {
+                answersCorrect++;
+            } else {
+                answersWrong++;
+            }
+        }),
+
+        $.each($("input[optradio='question2']:checked"), function () {
+            if ($(this).val() === data[2].answer) {
+                answersCorrect++;
+            } else {
+                answersWrong++;
+            }
+        }),
+
+        $.each($("input[optradio='question3']:checked"), function () {
+            if ($(this).val() === data[3].answer) {
+                answersCorrect++;
+            } else {
+                answersWrong++;
+            }
+        })
+
+
+    alert("You had " + answersCorrect + " correct answers");
+    alert("You had " + answersWrong + " incorrect answers")
 }
+
+
 window.onload = function () {
     startClock();
+    //console.log(data[2].answer)
     for (qNum = 0; qNum < data.length; qNum++) {
-        var questionDiv = '<div class="container" class ="row" class="col-md-8" class="question" id=question' + qNum + '>' + data[qNum].question + '</div>'
-        document.querySelector(".question").innerHTML += "<br>" + questionDiv + "<hr>";
+        var questionDiv = '<div class="question" id=question' + qNum + '>' + data[qNum].question + '</div>'
+        gameHTML.append(questionDiv)
         // console.log(questionDiv);
 
         for (i = 0; i < data[qNum].potentialAnswers.length; i++) {
-            var newAnswerDiv = '<input type="radio" name="optradio" id=answer' + i + '>' + data[qNum].potentialAnswers[i] + "</input>";
-            document.querySelector(".radio-btns").innerHTML += "<br>" + newAnswerDiv + "";
+            var newAnswerDiv = '<input type="radio" name="optradio' + qNum + ' " id=answer' + i + ' value = ' + data[qNum].potentialAnswers[i] + '>' + data[qNum].potentialAnswers[i] + "</input> <br>";
+            gameHTML.append(newAnswerDiv)
             // console.log(newAnswerDiv);
         }
+        gameHTML.append("<br>")
 
     }
 
