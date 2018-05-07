@@ -1,6 +1,6 @@
 var intervalId;
 var startTime = 30;
-count = 0;
+var count = 0;
 var answersUnanswered = 4;
 var answersCorrect = 0;
 var answersWrong = 0;
@@ -13,24 +13,25 @@ startClock = function () {
 showTime = function () {
     $("#time-remaining").html("You have " + (startTime - count) + " seconds left");
     count++;
-    if(count === 30){
+    console.log(count)     
+    if(count === 31){
       gameOver();
-      console.log(count)     
     }
 }
 
 gameOver = function(){
     alert("Time's up!")
+
 }
 window.onload = function () {
     startClock();
     for (qNum = 0; qNum < data.length; qNum++) {
-        var questionDiv = '<div class="container" class ="row" class="col-md-8" class="question">' + data[qNum].question + '</div>'
+        var questionDiv = '<div class="container" class ="row" class="col-md-8" class="question" id=question' + qNum + '>' + data[qNum].question + '</div>'
         document.querySelector(".question").innerHTML += "<br>" + questionDiv + "<hr>";
         // console.log(questionDiv);
 
         for (i = 0; i < data[qNum].potentialAnswers.length; i++) {
-            var newAnswerDiv = '<input type="radio" name="optradio">' + data[qNum].potentialAnswers[i] + "</input>";
+            var newAnswerDiv = '<input type="radio" name="optradio" id=answer' + i + '>' + data[qNum].potentialAnswers[i] + "</input>";
             document.querySelector(".radio-btns").innerHTML += "<br>" + newAnswerDiv + "";
             // console.log(newAnswerDiv);
         }
