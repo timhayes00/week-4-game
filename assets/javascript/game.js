@@ -80,8 +80,8 @@ window.onload = function () {
 
 var data = [
     {
-        question: "What is the air speed velocity of a fully laden European swallow?",
-        potentialAnswers: ["11 meters per second", "8 meters per second", "14 meters per second"],
+        question: "In SI units, what is the air speed velocity of a fully laden European swallow?",
+        potentialAnswers: ["11", "8", "14"],
         answer: "11 meters per second"
     },
     {
