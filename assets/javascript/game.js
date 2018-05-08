@@ -1,5 +1,5 @@
 var intervalId;
-var startTime = 30;
+var startTime = 10;
 var count = 0;
 var answersCorrect = 0;
 var answersWrong = 0;
@@ -14,23 +14,28 @@ showTime = function () {
     $("#time-remaining").html("You have " + (startTime - count) + " seconds left");
     count++;
     console.log(count)
-    if (count === 31) {
+    if (count === 11) {
         gameOver();
     }
 }
 
 gameOver = function () {
     alert("Time's up!")
-    console.log("ignition")
-    $.each($("input[optradio='question0']:checked"), function () {
 
+
+
+
+    console.log(data[3].answer)
+    $.each($("input[name='question0']:checked"), function () {
+        console.log("ignition")
         if ($(this).val() === data[0].answer) {
             answersCorrect++;
         } else {
             answersWrong++;
         }
+  
     }),
-        $.each($("input[optradio='question1']:checked"), function () {
+        $.each($("input[name='question1']:checked"), function () {
             if ($(this).val() === data[1].answer) {
                 answersCorrect++;
             } else {
@@ -38,7 +43,7 @@ gameOver = function () {
             }
         }),
 
-        $.each($("input[optradio='question2']:checked"), function () {
+        $.each($("input[name='question2']:checked"), function () {
             if ($(this).val() === data[2].answer) {
                 answersCorrect++;
             } else {
@@ -46,7 +51,7 @@ gameOver = function () {
             }
         }),
 
-        $.each($("input[optradio='question3']:checked"), function () {
+        $.each($("input[name='question3']:checked"), function () {
             if ($(this).val() === data[3].answer) {
                 answersCorrect++;
             } else {
@@ -59,17 +64,24 @@ gameOver = function () {
     alert("You had " + answersWrong + " incorrect answers")
 }
 
+{/* <div><input type="checkbox" value="1" class="chk"> Value 1</div>
+<div><input type="checkbox" value="2" class="chk"> Value 2</div>
+<div><input type="checkbox" value="3" class="chk"> Value 3</div>
+<div><input type="checkbox" value="4" class="chk"> Value 4</div>
+<div><input type="checkbox" value="5" class="chk"> Value 5</div> */}
+
+
 
 window.onload = function () {
     startClock();
     //console.log(data[2].answer)
     for (qNum = 0; qNum < data.length; qNum++) {
-        var questionDiv = '<div class="question" id=question' + qNum + '>' + data[qNum].question + '</div>'
+        var questionDiv = '<div class="question" id=quest' + qNum + '> ' + data[qNum].question + '</div>'
         gameHTML.append(questionDiv)
         // console.log(questionDiv);
 
         for (i = 0; i < data[qNum].potentialAnswers.length; i++) {
-            var newAnswerDiv = '<input type="radio" name="optradio' + qNum + ' " id=answer' + i + ' value = ' + data[qNum].potentialAnswers[i] + '>' + data[qNum].potentialAnswers[i] + "</input> <br>";
+            var newAnswerDiv = '<input type="radio" name="question' + qNum + '" id=answer' + i + ' value =' + data[qNum].potentialAnswers[i] + '> ' + data[qNum].potentialAnswers[i] + "</input> <br>";
             gameHTML.append(newAnswerDiv)
             // console.log(newAnswerDiv);
         }
